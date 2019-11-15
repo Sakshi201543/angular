@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { StorageServiceModule } from 'ngx-webstorage-service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularTokenService } from 'angular-token';
 
 import { AppRoutingModule } from './app-routing.module';
 import { FormService } from './form.service';
@@ -38,7 +39,7 @@ import { DataAccessService } from './shared/data-access.service';
     StorageServiceModule,
     HttpClientModule
   ],
-  providers: [FormService, DataAccessService],
+  providers: [FormService, DataAccessService, AngularTokenService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
