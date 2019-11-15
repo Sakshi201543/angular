@@ -16,11 +16,5 @@ export class AboutComponent implements OnInit {
   ngOnInit() {
     let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
     this.userData = loggedInUser;
-    console.log(this.userData);
   }
-  logout(){
-  	this.authService.logOut();
-    this.router.navigate(['/login']);
-  }
-
 }

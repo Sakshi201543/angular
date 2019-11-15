@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
+import { Observable } from 'rxjs';
+import { AuthGuard } from '../guards/auth.guard';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +8,17 @@ import * as $ from 'jquery';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+	userLoggedIn: boolean = false;
+  
+  constructor(private auth: AuthGuard) { }
 
-  constructor() { }
-
-  ngOnInit() {
+  ngOnInit(){
+  	this.auth.loggedInUser.subscribe(data => {
+  		this.userLoggedIn = data;
+  	});
   }
 
+  logOut(){
+  	this.userLoggedIn = false;
+  }
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl,Validators } from '@angular/forms';
-//import { MustMatch } from '../_helpers/must-match.validator';
+import { Router } from '@angular/router'; 
+
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { FormService } from '../form.service';
 import { Form } from '../form.model';
-
 
 @Component({
   selector: 'app-registration',
@@ -11,33 +11,35 @@ import { Form } from '../form.model';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
-  signupForm: FormGroup;
   form: Form ;
   genders = ['male','female'];
   show: boolean;
 
-  constructor(private formService: FormService){
-   this.show=false;
+  constructor(private formService: FormService, private fb: FormBuilder, private router: Router){
+    this.show=false;
   }
 
-  ngOnInit() {
-   this.signupForm = new FormGroup({
+  signupForm = this.fb.group({
     'username': new FormControl(null, Validators.required),
     'email': new FormControl(null,[Validators.required, Validators.email]),
     'password': new FormControl(null, [Validators.required, Validators.minLength(6)]),
     'confirmpassword': new FormControl(null, Validators.required),
     'gender': new FormControl(null, Validators.required)
-     },
-     // {
-     //    validator: MustMatch('password', 'confirmPassword')
-     //  }
-     );
-   this.formService.getFormData();
+    },
+    {
+      validators: this.checkPasswords
+  });
+
+
+  checkPasswords(group: FormGroup){
+    const pass = group.controls.password.value;
+    const confPassword = group.controls.confirmpassword.value;
+    return pass === confPassword ? null : { notSame: true } 
   }
 
-  // get f() { 
-  //   return this.signupForm.controls; 
-  // }
+  ngOnInit() {
+    this.formService.getFormData();
+  }
 
   onSubmit(){
     this.form = {name:this.signupForm.controls.username.value,
@@ -45,7 +47,9 @@ export class RegistrationComponent implements OnInit {
                    password:this.signupForm.controls.password.value,
                    gender:this.signupForm.controls.gender.value};
     this.formService.insertFormData(this.form);
-    this.formService.getFormData();
+    // this.formService.getFormData();
+    this.router.navigate(['/login']);
+
   }
 
   onClear(){

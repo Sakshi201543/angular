@@ -41,6 +41,9 @@
                formControlName="confirmpassword"
                >
                <button type="button" (click)="showPassword()">{{ show ? 'Hide':'Show' }} Password</button>
+               <div *ngIf="signupForm.hasError('notSame')" class="help-block">
+                  Password not matching.
+                </div>
       </div>
       <div class="form-group" *ngFor="let gender of genders">
         <input type="radio" 
