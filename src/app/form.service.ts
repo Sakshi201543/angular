@@ -1,11 +1,15 @@
 import { Inject, Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { Form } from './form.model';
 
 @Injectable()
 export class FormService{
 
   constructor(){}
+
+  changedLoggedInUser = new Subject<string>();
+
   insertFormData(form: Form){
     let fetchJsonData = [];
     fetchJsonData = JSON.parse(localStorage.getItem('local_form')) || [];
@@ -30,5 +34,9 @@ export class FormService{
       }
     }
     return status;
+  }
+
+  editLoggedInUser(loggedInUser: any){
+    this.changedLoggedInUser.next(loggedInUser);
   }
 }

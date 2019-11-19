@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { AuthGuard } from '../guards/auth.guard';
 
 @Component({
@@ -7,18 +7,23 @@ import { AuthGuard } from '../guards/auth.guard';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 	userLoggedIn: boolean = false;
+	subscription: Subscription;
   
   constructor(private auth: AuthGuard) { }
 
   ngOnInit(){
-  	this.auth.loggedInUser.subscribe(data => {
+  	this.subscription = this.auth.loggedInUser.subscribe(data => {
   		this.userLoggedIn = data;
   	});
   }
 
   logOut(){
   	this.userLoggedIn = false;
+  }
+  
+  ngOnDestroy(){
+  	this.subscription.unsubscribe();
   }
 }

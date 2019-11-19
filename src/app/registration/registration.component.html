@@ -40,7 +40,8 @@
                class="form-control"
                formControlName="confirmpassword"
                >
-               <button type="button" (click)="showPassword()">{{ show ? 'Hide':'Show' }} Password</button>
+               <br>
+               <button type="button" class="btn btn-primary" (click)="showPassword()">{{ show ? 'Hide':'Show' }} Password</button>
                <div *ngIf="signupForm.hasError('notSame')" class="help-block">
                   Password not matching.
                 </div>

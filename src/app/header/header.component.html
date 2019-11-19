@@ -6,15 +6,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li routerLinkActive="active"><a routerLink="/home">Home</a></li>
-      <li class="dropdown" routerLinkActive="active">
-        <a class="dropdown-toggle" data-toggle="dropdown" style="cursor: pointer">Contact
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a routerLink="contact/address">Address</a></li>
-          <li><a routerLink="contact/number">Number</a></li>
-        </ul>
-      </li>
-      <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+      <li routerLinkActive="active"><a routerLink="/contact">Contact</a></li>
       <li><a routerLink="/registration" routerLinkActive="active">Signup</a></li>
       <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
     </ul>
@@ -30,15 +22,9 @@
     </div>
     <ul class="nav navbar-nav">
       <li routerLinkActive="active"><a routerLink="/home">Home</a></li>
-      <li class="dropdown" routerLinkActive="active">
-        <a class="dropdown-toggle" data-toggle="dropdown" style="cursor: pointer">Contact
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a routerLink="contact/address">Address</a></li>
-          <li><a routerLink="contact/number">Number</a></li>
-        </ul>
-      </li>
+      <li routerLinkActive="active"><a routerLink="/contact">Contact</a></li>
       <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+      <!-- <li><a routerLink="/edit" routerLinkActive="active">Edit</a></li> -->
       <li><a routerLink="/login" routerLinkActive="active" (click)="logOut()">Logout</a></li>
     </ul>
   </div>

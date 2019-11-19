@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
+import { EncrDecrService } from '../shared/encr-decr.service';
 import { FormService } from '../form.service';
 import { AuthService } from '../auth-services/auth.service';
 
@@ -15,7 +17,7 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   message: string = null;
 
-  constructor(private formService: FormService, private authService: AuthService,private router: Router) { }
+  constructor(private formService: FormService, private authService: AuthService,private router: Router, private encrDecrService: EncrDecrService) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -29,7 +31,8 @@ export class LoginComponent implements OnInit {
   onLogin(){
     const email = this.loginForm.controls.email.value;
     const password = this.loginForm.controls.password.value;
-    if(this.formService.getUserEmail(email,password)){
+    var encrypted = this.encrDecrService.set('123456$#@$^@1ERF', password);
+    if(this.formService.getUserEmail(email,encrypted)){
       this.router.navigate([this.returnUrl]);
     }
     else{

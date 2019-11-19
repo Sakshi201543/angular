@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'; 
-
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+
+import { EncrDecrService } from '../shared/encr-decr.service';
 import { FormService } from '../form.service';
 import { Form } from '../form.model';
 
@@ -15,7 +16,7 @@ export class RegistrationComponent implements OnInit {
   genders = ['male','female'];
   show: boolean;
 
-  constructor(private formService: FormService, private fb: FormBuilder, private router: Router){
+  constructor(private formService: FormService, private fb: FormBuilder, private router: Router, private encrDecrService: EncrDecrService){
     this.show=false;
   }
 
@@ -42,12 +43,13 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit(){
+    let encrypted = this.encrDecrService.set('123456$#@$^@1ERF', this.signupForm.controls.password.value);
+    console.log(encrypted);
     this.form = {name:this.signupForm.controls.username.value,
                    email:this.signupForm.controls.email.value,
-                   password:this.signupForm.controls.password.value,
+                   password: encrypted,
                    gender:this.signupForm.controls.gender.value};
     this.formService.insertFormData(this.form);
-    // this.formService.getFormData();
     this.router.navigate(['/login']);
 
   }

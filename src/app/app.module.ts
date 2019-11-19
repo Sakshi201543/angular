@@ -12,12 +12,11 @@ import { HeaderComponent } from './header/header.component';
 import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
-import { AddressComponent } from './contact/address/address.component';
-import { NumberComponent } from './contact/number/number.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { DataAccessService } from './shared/data-access.service';
+import { EditComponent } from './about/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -26,11 +25,10 @@ import { DataAccessService } from './shared/data-access.service';
     ContactComponent,
     AboutComponent,
     HomeComponent,
-    AddressComponent,
-    NumberComponent,
     PagenotfoundComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,
